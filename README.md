@@ -256,16 +256,12 @@ This project is for educational purposes.
 
 ## 👤 Author
 
-**Sehajpreet Singh**
-- Roll No: 2411804
-- Course: B.Tech CSE 5th Semester
-- Session: 2024-2028
+Full-stack e-commerce project developed during summer training.
 
 ## 🙏 Acknowledgments
 
-- Summer Training: Udemy (8 June - 24 July 2024)
-- Supervisor: Navin Reddy
-- Course: Spring Boot & React Full Stack Development
+- Built with Spring Boot & React
+- Follows modern web development best practices
 
 ## 📧 Support
 

@@ -9,10 +9,24 @@
 **/application-local.properties
 **/application-secret.properties
 
+# Personal/Academic files
+SUMMER_TRAINING_REPORT.md
+REPORT_GENERATION_COMPLETE.md
+*_TRAINING_REPORT.md
+**/Project-Report-*.docx
+**/*_Singh_*.docx
+
 # Temporary files created during development
 CleanDuplicates.java
 clean_duplicates.ps1
 remove_duplicate_products.sql
+
+# Python report generation scripts
+build_*.py
+generate_*.py
+edit_report.py
+create_from_template.py
+quick_report.py
 
 # IDE
 .idea/

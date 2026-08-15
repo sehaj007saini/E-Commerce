@@ -226,13 +226,6 @@ cd ecom-frontend-5-main/ecom-frontend-5-main
 npm test
 ```
 
-## 📝 Features Documentation
-
-For detailed documentation about specific features:
-- [Admin Authentication](ADMIN_AUTH_COMPLETE.md)
-- [Chatbot Implementation](CHATBOT_TEST_RESULTS.md)
-- [Product Cleanup Process](PRODUCTS_CLEANUP_COMPLETE.md)
-
 ## 🐛 Known Issues
 
 - Category names are case-sensitive (some are "laptop", others "Laptop")

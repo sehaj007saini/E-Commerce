@@ -16,9 +16,7 @@ npm run dev
 
 **URL**: http://localhost:5173/login
 
-**Credentials**:
-- Username: `admin`
-- Password: `admin123`
+**Credentials**: Contact repository owner for demo admin access
 
 ## 🌐 URLs
 

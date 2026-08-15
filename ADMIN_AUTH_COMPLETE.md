@@ -10,9 +10,7 @@ All admin authentication features have been successfully implemented. Your e-com
 
 ### 1. **Admin Authentication System**
 - **Login Component**: Modern gradient-styled login page at `/login`
-- **Admin Credentials**: 
-  - Username: `admin`
-  - Password: `admin123`
+- **Admin Credentials**: Available for testing (contact repo owner)
 - **Session Persistence**: Login state saved in localStorage
 - **Auto-redirect**: Non-admin users redirected when accessing protected routes
 
@@ -94,7 +92,7 @@ npm run dev
 
 ### As Admin:
 1. Click "Admin Login" button in navbar
-2. Login with credentials (admin / admin123)
+2. Login with admin credentials (credentials available on request)
 3. "Add Product" link appears in navbar
 4. Can add new products via form
 5. Can update existing products

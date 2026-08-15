@@ -156,8 +156,7 @@ SummerProject/
 ## 🎯 Default Credentials
 
 ### Admin Login
-- **Username:** `admin`
-- **Password:** `admin123`
+Contact the repository owner for demo admin credentials.
 
 ### Test User
 - **Username:** `user`

@@ -311,9 +311,7 @@ npm run dev
 curl http://localhost:8080/api/products | jq 'length'
 # Should show: 35
 
-# 4. Log in as admin
-# Username: admin
-# Password: admin123
+# 4. Log in as admin (credentials available on request)
 # Should work: ✅
 ```
 

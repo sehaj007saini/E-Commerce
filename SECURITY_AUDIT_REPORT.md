@@ -96,7 +96,7 @@ spring.datasource.password=your_password_here  # Example only
 ### These files are SAFE (no sensitive data):
 - All `.java` source files (except CleanDuplicates.java)
 - All `.jsx` React components
-- `data.sql` - Only has test user passwords (admin123, user123)
+- `data.sql` - Only has test user passwords (not shown publicly)
 - Documentation files - Only example emails
 - Test request files - Only example data
 

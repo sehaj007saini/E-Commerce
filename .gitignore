@@ -16,6 +16,12 @@ REPORT_GENERATION_COMPLETE.md
 **/Project-Report-*.docx
 **/*_Singh_*.docx
 
+# Security and audit files
+SECURITY_AUDIT_REPORT.md
+DELETED_FILES_IMPACT.md
+FINAL_SECURITY_VERIFICATION.md
+PRIVACY_UPDATE_COMPLETE.md
+
 # Temporary files created during development
 CleanDuplicates.java
 clean_duplicates.ps1

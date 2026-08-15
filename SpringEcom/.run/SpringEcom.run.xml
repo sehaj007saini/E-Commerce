@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" name="SpringEcom" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <envs>
+      <env name="DB_PASSWORD" value="" />
+    </envs>
+    <module name="SpringEcom" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.telusko.SpringEcom.SpringEcomApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+  <configuration default="false" name="SpringEcom (H2 fallback)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <module name="SpringEcom" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.telusko.SpringEcom.SpringEcomApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

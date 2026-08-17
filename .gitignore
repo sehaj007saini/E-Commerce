@@ -8,6 +8,16 @@
 # Database credentials
 **/application-local.properties
 **/application-secret.properties
+**/application.properties
+
+# PowerShell scripts (MySQL migration)
+*.ps1
+MYSQL_MOVE_INSTRUCTIONS.md
+
+# IDE Run Configurations
+.run/
+**/.run/
+*.run.xml
 
 # Personal/Academic files
 SUMMER_TRAINING_REPORT.md

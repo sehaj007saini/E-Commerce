@@ -13,7 +13,7 @@ const UpdateProduct = () => {
     brand: "",
     price: "",
     category: "",
-    releaseDate: "",
+    releaseDate: null,
     productAvailable: false,
     stockQuantity: "",
   });
@@ -56,31 +56,52 @@ const UpdateProduct = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log("images", image)
-    console.log("productsdfsfsf", updateProduct)
-    const updatedProduct = new FormData();
-    updatedProduct.append("imageFile", image);
-    updatedProduct.append(
+    console.log("product data", updateProduct)
+    
+    // Create a clean product object with all required fields
+    const productData = {
+      id: updateProduct.id,
+      name: updateProduct.name || product.name,
+      description: updateProduct.description || product.description,
+      brand: updateProduct.brand || product.brand,
+      price: updateProduct.price || product.price,
+      category: updateProduct.category || product.category,
+      releaseDate: updateProduct.releaseDate || product.releaseDate,
+      productAvailable: updateProduct.productAvailable,
+      stockQuantity: updateProduct.stockQuantity || product.stockQuantity,
+      imageName: product.imageName,
+      imageType: product.imageType
+    };
+    
+    console.log("Sending product data:", productData);
+    
+    const formData = new FormData();
+    formData.append("imageFile", image);
+    formData.append(
       "product",
-      new Blob([JSON.stringify(updateProduct)], { type: "application/json" })
+      new Blob([JSON.stringify(productData)], { type: "application/json" })
     );
   
-
-  console.log("formData : ", updatedProduct)
-    axios
-      .put(`http://localhost:8080/api/product/${id}`, updatedProduct, {
+    console.log("formData created");
+    
+    try {
+      const response = await axios.put(`http://localhost:8080/api/product/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "Authorization": "Basic " + btoa("admin:admin123")
         },
-      })
-      .then((response) => {
-        console.log("Product updated successfully:", updatedProduct);
-        alert("Product updated successfully!");
-      })
-      .catch((error) => {
-        console.error("Error updating product:", error);
-        console.log("product unsuccessfull update",updateProduct)
-        alert("Failed to update product. Please try again.");
       });
+      
+      console.log("Product updated successfully:", response.data);
+      alert("Product updated successfully!");
+      
+    } catch (error) {
+      console.error("Error updating product:", error);
+      console.error("Error response:", error.response?.data);
+      console.error("Error status:", error.response?.status);
+      console.log("Product data:", productData);
+      alert("Failed to update product. Please try again. Check console for details.");
+    }
   };
  
 

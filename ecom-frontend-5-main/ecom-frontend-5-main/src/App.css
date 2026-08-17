@@ -9,6 +9,7 @@ html,
 #root {
   min-height: 100%;
   height: auto;
+  overflow-y: visible;
 }
 
 body {
@@ -21,6 +22,7 @@ body {
 
 html {
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .light-theme,

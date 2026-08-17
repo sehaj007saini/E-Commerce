@@ -97,6 +97,18 @@ public class OrderService {
         return orderResponses;
     }
 
+    @Transactional
+    public List<OrderResponse> getOrdersByUserEmail(String email) {
+        List<Order> orders = orderRepo.findByEmail(email);
+        List<OrderResponse> orderResponses = new ArrayList<>();
+
+        for (Order order : orders) {
+            orderResponses.add(buildOrderResponse(order));
+        }
+        
+        return orderResponses;
+    }
+
     public OrderResponse getOrderByOrderId(String orderId) {
         Order order = orderRepo.findByOrderId(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with orderId: " + orderId));

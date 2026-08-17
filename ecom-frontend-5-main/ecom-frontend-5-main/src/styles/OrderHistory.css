@@ -1,0 +1,37 @@
+/* OrderHistory Component Specific Styles */
+
+.order-history-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--body_background, #f8fafc);
+}
+
+.order-history-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #1e293b;
+}
+
+/* Ensure scrolling works properly */
+.order-history-wrapper * {
+  box-sizing: border-box;
+}
+
+/* Override any fixed height constraints */
+.admin-dashboard-container.order-history {
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+@media (max-width: 768px) {
+  .order-history-container {
+    padding: 16px;
+  }
+}

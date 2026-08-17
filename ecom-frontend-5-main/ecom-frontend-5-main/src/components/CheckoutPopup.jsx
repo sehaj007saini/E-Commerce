@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { API_BASE_URL } from '../config/constants';
 
-const CheckoutPopup = ({ show, handleClose, cartItems, totalPrice, handleCheckout }) => {
+const CheckoutPopup = ({ show, handleClose, cartItems, totalPrice, handleCheckout, isProcessing }) => {
   const [couponCode, setCouponCode] = useState('');
   const [discountInfo, setDiscountInfo] = useState(null);
   const [couponMsg, setCouponMsg] = useState('');
@@ -153,11 +153,17 @@ const CheckoutPopup = ({ show, handleClose, cartItems, totalPrice, handleCheckou
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} disabled={isProcessing}>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleCheckout} style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none', padding: '8px 20px', fontWeight: '700' }}>
-            <i className="bi bi-bag-check-fill" style={{ marginRight: '6px' }}></i> Confirm & Pay ${finalTotal.toFixed(2)}
+          <Button 
+            variant="success" 
+            onClick={handleCheckout} 
+            disabled={isProcessing}
+            style={{ background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none', padding: '8px 20px', fontWeight: '700' }}
+          >
+            <i className="bi bi-bag-check-fill" style={{ marginRight: '6px' }}></i> 
+            {isProcessing ? 'Processing...' : `Confirm & Pay $${finalTotal.toFixed(2)}`}
           </Button>
         </Modal.Footer>
       </Modal>

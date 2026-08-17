@@ -88,9 +88,18 @@ const Home = ({ selectedCategory }) => {
       filtered = filtered.filter(p => p.price <= filters.maxPrice);
     }
 
-    // Stock filter
+    // Stock filter - admins can see all products
     if (filters.inStockOnly) {
-      filtered = filtered.filter(p => p.productAvailable && p.stockQuantity > 0);
+      if (isAdmin) {
+        // Admins see all products but prioritize available ones
+        filtered.sort((a, b) => {
+          if (a.productAvailable === b.productAvailable) return 0;
+          return a.productAvailable ? -1 : 1;
+        });
+      } else {
+        // Regular users only see available products
+        filtered = filtered.filter(p => p.productAvailable && p.stockQuantity > 0);
+      }
     }
 
     // Sorting

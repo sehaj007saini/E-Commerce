@@ -4,6 +4,9 @@
   padding: 24px;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: #1e293b;
+  min-height: auto;
+  height: auto;
+  overflow: visible;
 }
 
 .dashboard-header {

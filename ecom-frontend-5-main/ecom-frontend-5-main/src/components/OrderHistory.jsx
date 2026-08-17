@@ -3,6 +3,7 @@ import { API_BASE_URL } from '../config/constants';
 import { useAuth } from '../Context/AuthContext';
 import Toast from './Toast';
 import '../styles/AdminDashboard.css';
+import '../styles/OrderHistory.css';
 
 const OrderHistory = () => {
   const { user } = useAuth();
@@ -18,18 +19,35 @@ const OrderHistory = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/orders`);
+      if (!user || !user.email) {
+        showToast('Please login to view your orders', 'warning');
+        setOrders([]);
+        setLoading(false);
+        return;
+      }
+
+      const url = `${API_BASE_URL}/orders/user/${encodeURIComponent(user.email)}`;
+      console.log('Fetching orders from:', url);
+      console.log('User email:', user.email);
+      
+      const res = await fetch(url);
+      console.log('Response status:', res.status);
+      
       if (res.ok) {
         const data = await res.json();
-        if (user && user.email) {
-          const userOrders = data.filter(o => o.email === user.email);
-          setOrders(userOrders.length > 0 ? userOrders : data);
-        } else {
-          setOrders(data);
-        }
+        console.log('Orders received:', data);
+        setOrders(data);
+      } else if (res.status === 404) {
+        console.log('No orders found for user');
+        setOrders([]);
+      } else {
+        const errorText = await res.text();
+        console.error('Error response:', errorText);
+        showToast('Failed to fetch orders', 'error');
       }
     } catch (err) {
       console.error('Failed to fetch orders', err);
+      showToast('Error loading orders', 'error');
     } finally {
       setLoading(false);
     }
@@ -92,13 +110,14 @@ const OrderHistory = () => {
   };
 
   return (
-    <div className="admin-dashboard-container">
-      <Toast
-        show={toast.show}
-        message={toast.message}
-        type={toast.type}
-        onClose={() => setToast({ ...toast, show: false })}
-      />
+    <div className="order-history-wrapper">
+      <div className="admin-dashboard-container order-history">
+        <Toast
+          show={toast.show}
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast({ ...toast, show: false })}
+        />
 
       <div className="dashboard-header">
         <div>
@@ -238,6 +257,7 @@ const OrderHistory = () => {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 };

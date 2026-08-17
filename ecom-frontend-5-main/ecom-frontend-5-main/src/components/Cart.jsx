@@ -260,11 +260,21 @@
 
 import React, { useContext, useState } from "react";
 import AppContext from "../Context/Context";
+import { useAuth } from "../Context/AuthContext";
 import CheckoutPopup from "./CheckoutPopup";
+import Toast from "./Toast";
+import orderService from "../services/orderService";
 
 const Cart = () => {
   const { cart, removeFromCart, clearCart, updateCartItemQuantity } = useContext(AppContext);
+  const { user } = useAuth();
   const [showModal, setShowModal] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'info' });
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const showToast = (message, type) => {
+    setToast({ show: true, message, type });
+  };
 
   const totalPrice = cart.reduce((acc, item) => acc + item.price * (item.quantity || 1), 0);
 
@@ -290,13 +300,61 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     if (cart.length === 0) return;
-    clearCart();
-    setShowModal(false);
-    alert("Checkout complete. Your cart is now empty.");
+
+    if (!user || !user.email) {
+      showToast('Please login to place an order', 'error');
+      setShowModal(false);
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      // Prepare order data
+      const orderData = {
+        customerName: user.username || user.email.split('@')[0],
+        email: user.email,
+        items: cart.map(item => ({
+          productId: item.id,
+          quantity: item.quantity
+        }))
+      };
+
+      console.log('Placing order:', orderData);
+
+      // Place order using the service
+      const result = await orderService.placeOrder(orderData);
+
+      if (result.success) {
+        showToast(`Order placed successfully! Order ID: ${result.data.orderId}`, 'success');
+        clearCart();
+        setShowModal(false);
+        
+        // Redirect to orders page after 2 seconds
+        setTimeout(() => {
+          window.location.href = '/orders';
+        }, 2000);
+      } else {
+        showToast(result.error.message || 'Failed to place order', 'error');
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      showToast('An error occurred during checkout', 'error');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
-    <main className="cart-layout">
+    <>
+      <Toast
+        show={toast.show}
+        message={toast.message}
+        type={toast.type}
+        onClose={() => setToast({ ...toast, show: false })}
+      />
+      
+      <main className="cart-layout">
       <section className="cart-panel">
         <h2>Shopping Bag</h2>
         {cart.length === 0 ? (
@@ -347,8 +405,8 @@ const Cart = () => {
                 <span>Total</span>
                 <strong>${totalPrice.toFixed(2)}</strong>
               </div>
-              <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-                Checkout
+              <button className="btn btn-primary" onClick={() => setShowModal(true)} disabled={isProcessing}>
+                {isProcessing ? 'Processing...' : 'Checkout'}
               </button>
               <button className="btn btn-outline-secondary" onClick={clearCart}>
                 Clear cart
@@ -373,9 +431,10 @@ const Cart = () => {
         cartItems={cart}
         totalPrice={totalPrice}
         handleCheckout={handleCheckout}
+        isProcessing={isProcessing}
       />
     </main>
-
+    </>
   );
 };
 

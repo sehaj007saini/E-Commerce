@@ -1,0 +1,9 @@
+target/
+.mvn/
+*.iml
+.idea/
+.run/
+.env
+*.log
+.DS_Store
+Thumbs.db
